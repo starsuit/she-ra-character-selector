@@ -1,25 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import CharacterList from "./CharacterList";
+import CharacterProfile from "./CharacterProfile";
+import { characterNames } from "./data";
 
 function App() {
+  const [characterIndex, setCharacterIndex] = React.useState(0);
+  const characterName = characterNames[characterIndex];
+  React.useEffect(() => {
+    function handleKeydown(event) {
+      const key = event.key;
+      switch (key) {
+        case "ArrowRight":
+          setCharacterIndex(oldIndex => {
+            event.preventDefault();
+            return (oldIndex + 1) % characterNames.length;
+          });
+          break;
+        case "ArrowLeft":
+          setCharacterIndex(oldIndex => {
+            event.preventDefault();
+            return (
+              ((oldIndex < 1 ? oldIndex + characterNames.length : oldIndex) -
+                1) %
+              characterNames.length
+            );
+          });
+          break;
+        case "ArrowUp":
+          setCharacterIndex(oldIndex => {
+            event.preventDefault();
+            return (
+              ((oldIndex < 4 ? oldIndex + characterNames.length : oldIndex) -
+                4) %
+              characterNames.length
+            );
+          });
+          break;
+        case "ArrowDown":
+          setCharacterIndex(oldIndex => {
+            event.preventDefault();
+            return (oldIndex + 4) % characterNames.length;
+          });
+          break;
+        default:
+          break;
+      }
+    }
+    window.addEventListener("keydown", handleKeydown);
+    // cleanup function
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <h1>She-Ra</h1>
+      <CharacterList
+        selected={characterIndex}
+        setCharacterIndex={setCharacterIndex}
+      />
+      <CharacterProfile name={characterName} />
+    </main>
   );
 }
 
