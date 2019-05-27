@@ -11,6 +11,12 @@ const CharacterProfile = props => {
         alt={characters[props.name].name}
         className="character-profile__image"
       />
+      <ul className="character-profile__skills">
+        Skills:
+        {characters[props.name].skills.map(skill => {
+          return <li className="character-profile__skills">{skill}</li>;
+        })}
+      </ul>
     </div>
   );
 };

@@ -55,11 +55,13 @@ function App() {
   return (
     <main>
       <h1>She-Ra</h1>
-      <CharacterList
-        selected={characterIndex}
-        setCharacterIndex={setCharacterIndex}
-      />
-      <CharacterProfile name={characterName} />
+      <div className="content-container">
+        <CharacterList
+          selected={characterIndex}
+          setCharacterIndex={setCharacterIndex}
+        />
+        <CharacterProfile name={characterName} />
+      </div>
     </main>
   );
 }

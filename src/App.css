@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+.content-container {
+  display: flex;
+}
+
 .character-list {
   list-style-type: none;
   padding: 0;
@@ -35,4 +39,8 @@ body {
 
 .character-card__image {
   height: 4em;
+}
+
+.character-profile__image {
+  height: 8em;
 }
